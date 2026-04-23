@@ -1,0 +1,30 @@
+# Ignore build artifacts
+build/
+*.pcm
+*.o
+*.out
+
+# Ignore cache
+.cache/
+*.swp
+*.swo
+*~
+
+# IDE files
+.vscode/
+.idea/
+*.code-workspace
+*.swp
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Executables
+/test/main
+*.exe
+*.bin
+
+# Temporary files
+*.tmp
+temp/
