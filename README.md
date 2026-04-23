@@ -1,3 +1,4 @@
+# Readme is AI generated >_> too lazy
 # C++23 Modules Setup on Linux (Clang 20 + libc++)
 
 > ⚠️ **Project Status**: ACTIVE DEVELOPMENT & TESTING  
