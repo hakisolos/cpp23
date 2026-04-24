@@ -25,6 +25,38 @@ func main() {
 	case "--version", "-v":
 		fmt.Printf("cspark version %s\n", src.AppVersion)
 		return
+	case "--uninstall":
+		fmt.Print("This will remove cspark and the precompiled modules. Are you sure? (yes/no): ")
+		var confirm string
+		fmt.Scanln(&confirm)
+		if confirm != "yes" {
+			fmt.Println("Uninstall cancelled.")
+			return
+		}
+
+		if _, err := os.Stat(cfg.PcmPath); err == nil {
+			os.Remove(cfg.PcmPath)
+			fmt.Println("Removed precompiled modules.")
+		}
+
+		exePath, err := os.Executable()
+		if err == nil {
+			fmt.Printf("Removing binary at %s...\n", exePath)
+			cmd := exec.Command("sudo", "rm", exePath)
+			if err := cmd.Run(); err != nil {
+				fmt.Printf("Note: Could not remove binary automatically. Please run: sudo rm %s\n", exePath)
+			}
+		}
+
+		fmt.Print("Do you also want to uninstall Clang 19? (yes/no): ")
+		var clangConfirm string
+		fmt.Scanln(&clangConfirm)
+		if clangConfirm == "yes" {
+			src.UninstallClang()
+		}
+
+		fmt.Println("Uninstallation complete.")
+		return
 	}
 
 	if _, err := exec.LookPath(cfg.ClangBin); err != nil {
